@@ -1,0 +1,79 @@
+% compare the computional cost
+tic
+dt=0.001;
+dx=10;
+dz=10;
+
+vp=3000*fones(400,400);
+% vp(1:100,:)=3500;
+% vp(101:end,1:100)=2500;
+
+vs=vp./1.73;
+rho=vp/1.5;
+
+[Nz,Nx]=size(vp);
+sx=Nx/2;
+sz=Nz/2;
+Nt=600;
+fm=30;        %domain frequence
+delay=40;
+Npml=40;
+ricker=gfricker(Nt,fm,dt,delay);
+loc=gfloc2(vp,sz,sx);
+
+
+Vz=fzeros(Nz,Nx);
+Vzx=fzeros(Nz,Nx);
+Vzz=fzeros(Nz,Nx);
+Vx=fzeros(Nz,Nx);
+Vxx=fzeros(Nz,Nx);
+Vxz=fzeros(Nz,Nx);
+
+Txx=fzeros(Nz,Nx);
+Txxx=fzeros(Nz,Nx);
+Txxz=fzeros(Nz,Nx);
+
+Tzz=fzeros(Nz,Nx);
+Tzzx=fzeros(Nz,Nx);
+Tzzz=fzeros(Nz,Nx);
+
+Txz=fzeros(Nz,Nx);
+Txzx=fzeros(Nz,Nx);
+Txzz=fzeros(Nz,Nx);
+
+cx=dt.*rho.*vp.^2;
+cz=dt.*rho.*vp.^2;
+cp=dt./rho;
+
+cs=vs.*vs.*dt.*rho;
+cn=-2.*vs.*vs.*dt.*rho;
+ca=-vs.*vs.*dt.*rho;
+
+[qz,qx]=gfpml(Nz,Nx,20,0.1);
+plx=1./(1+qx*dt/2);
+pmx=1-qx*dt/2;
+plz=1./(1+qz*dt/2);
+pmz=1-qz*dt/2;
+
+
+for k=1:Nt
+    
+    Vxx=plx.*(pmx.*Vxx+sfLx(Txx,dx));
+    Vxz=plz.*(pmz.*Vxz+sbLz(Txz,dz));
+    Vx=Vxx+Vxz;
+    
+    Vzx=plx.*(pmx.*Vzx+sbLx(Txz,dx));
+    Vzz=plz.*(pmz.*Vzz+sfLz(Tzz,dz));
+    Vz=Vzx+Vzz;
+
+    temp1=sbLx(Vx,dx);
+    temp2=sbLz(Vz,dz);
+    
+
+    Txxx=Tsxx+cn.*temp2;
+    
+    Tszz=Tszz+cn.*temp1;
+    Tsxz=Tsxz+cs.*sfLx(Vz,dx)+cs.*sbLz(Vx,dz);
+    
+end
+

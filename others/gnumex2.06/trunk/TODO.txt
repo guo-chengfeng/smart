@@ -1,0 +1,12 @@
+THINGS TO DO
+
+2014-March
+-Add GDB topic to documentation
+-Add structure of a mexopts.bat file to documentation
+-Add more information on fortran compiling
+	-Fix issues with x64 fortran compiling
+-Implement use of gendef.exe in gnumex.m
+-Add test cases and script that executes test
+
+-Major rewrite gnumex.m needed to clean it up.  Reduce the compatibility for the 
+	sake of maintainable code.  Consider templating a mexopt.bat file.

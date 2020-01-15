@@ -1,0 +1,2 @@
+
+! nvcc -ptx gfconvn.cu

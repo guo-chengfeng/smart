@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+	  <meta name="date" content="2013-11-09 01:12:12 -0600">
+      <meta name="author" content="Jason Nicholson">
+      <meta name="description" content="Compile matlab mex files with gcc on Windows Platforms">
+      <meta name="keywords" content="Gnumex" lang="en"><title>Gnumex - G77 Examples</title><style type="text/css">
+	  <style type="text/css">
+.content {
+  margin-left: 6em;
+  padding-top: 1em;
+  position: absolute;
+  margin-top: 4.5em;
+  width: 70%;
+}
+pre.codeoutput {
+  margin: 0px 0px 20px;
+  color: #4c4c4c;
+}
+.string {
+  color: #a020f0;
+}
+</style></head><body>
+<div id="content">
+  <h2>Files</h2>
+  <p><b>yprime77.f</b>: Gateway routine to yprime SUBROUTINE.<br>
+  <b>yprimef.f</b>: yprime SUBROUTINE.</p>
+  <h2>Instructions</h2> 
+  <p>configure gnumex for g77 using the <a href="http://gnumex.sourceforge.net/Documentation.html">Documentation</a> and the lines typed into the MATLAB command line below.  Your answer should be the same.</p><code>&gt;&gt;gnumex<br>&gt;&gt;mex <span class="string">yprime77.f</span> <span class="string">yprimef.f</span><br>&gt;&gt;yprime77(1, 1:4)<br>ans =<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+8.9685&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -1.0947<br></code>
+<p><br>
+</p>
+<h2>Software Used for Testing Examples</h2>
+<ul>
+	<li>2008-April - gnumex 2.00, g77 3.4.2 (From the MinGW project), MATLAB Versions 7.1 through 7.6 32bit</li>
+	<ul>
+		<li>g77 obtained from <a href="http://sourceforge.net/project/showfiles.php?group_id=2435">http://sourceforge.net/project/showfiles.php?group_id=2435</a></li>
+	</ul>
+	<li>2013-Dec &nbsp;&nbsp;- gnumex 2.06, g77 3.4.5 (From the MinGW project), MATLAB 2012b 8.0.0.783 32bit, Windows 7 x64</li>
+	<ul>
+		<li>Packages used for g77:</li>
+		<ul>
+			<li><a href="http://sourceforge.net/projects/mingw/files/MinGW/Base/binutils/binutils-2.19.1/binutils-2.19.1-mingw32-bin.tar.gz/download">binutils-2.19.1-mingw32-bin.tar.gz</a></li>
+			<li><a href="http://sourceforge.net/projects/mingw/files/MinGW/Base/gcc/Version3/Current%20Release_%20gcc-3.4.5-20060117-3/gcc-core-3.4.5-20060117-3.tar.gz/download">gcc-core-3.4.5-20060117-3.tar.gz</a></li>
+			<li><a href="http://sourceforge.net/projects/mingw/files/MinGW/Base/gcc/Version3/Current%20Release_%20gcc-3.4.5-20060117-3/gcc-g77-3.4.5-20060117-3.tar.gz/download">gcc-g77-3.4.5-20060117-3.tar.gz</a></li>
+			<li><a href="http://sourceforge.net/projects/mingw/files/MinGW/Base/mingw-rt/mingw-runtime-3.14/mingw-runtime-3.14.tar.gz/download">mingw-runtime-3.14.tar.gz</a></li>
+			<li><a href="http://sourceforge.net/projects/mingw/files/MinGW/Base/w32api/w32api-3.11/w32api-3.11.tar.gz/download">w32api-3.11.tar.gz</a></li>
+		</ul>
+	</ul>
+</ul>
+<div id="sf_logo">
+  <a href="http://sourceforge.net/"><img src="http://sourceforge.net/sflogo.php?group_id=2888&amp;type=1" width="88" height="31" style="border: 0;" alt="SourceForge.net Logo"></a>
+</div>
+</div>
+</body></html>

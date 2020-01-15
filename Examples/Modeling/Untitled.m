@@ -1,0 +1,65 @@
+Nx=300;
+Nz=300;
+Nt=600;
+dt=0.001;
+dx=10;
+dz=10;
+sx=Nx/2;
+sz=Nz/2;
+P1=fzeros(Nx,Nz);
+P2=fzeros(Nx,Nz);
+P0=fzeros(Nx,Nz);
+P1x=fzeros(Nx,Nz);
+P2x=fzeros(Nx,Nz);
+P0x=fzeros(Nx,Nz);
+P1z=fzeros(Nx,Nz);
+P2z=fzeros(Nx,Nz);
+P0z=fzeros(Nx,Nz);
+vp=3000*fones(Nx,Nz);
+
+vp(1:100,:)=2500;
+vp(101:200,1:100)=2500;
+vp2=vp/max(max(vp))-0.5;
+
+
+loc=gfloc(Nz,Nx,sz,sx);
+fm=30;lag=40; wlet=gfricker(Nt,fm,dt,lag);
+cn=dt.*dt.*vp.*vp;
+[qz,qx]=gfpml(Nz,Nx,20,0.1);
+Q=qx+qz;
+pl=1./(1+Q*dt/2);
+pm=(1-Q*dt/2);
+plx=1./(1+qx*dt/2);
+pmx=1-qx*dt/2;
+plz=1./(1+qz*dt/2);
+pmz=1-qz*dt/2;
+
+for it=1:Nt
+    
+    P2x=plx.*(2*P1x-pmx.*P0x+cn.*gfLx2(P1,dx));
+    P2z=plz.*(2*P1z-pmz.*P0z+cn.*gfLz2(P1,dz));
+    P0x=P1x;
+    P1x=P2x;
+    P0z=P1z;
+    P1z=P2z;
+    P1=P1x+P1z+loc*wlet(it);
+    if mod(it,4)==0
+        
+        P=P1/max(max(P1));
+imagesc(vp2);
+hold on
+h=imagesc(P);
+alpha(h,0.8)
+hold off
+        getframe;
+    end
+    
+end
+
+
+P=P1/max(max(P1));
+imagesc(P);
+hold on
+h=imagesc(vp2);
+alpha(h,0.6)
+colormap(gray)
